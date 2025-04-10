@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-yellow: #FFC107;
+      --accent-orange: #FF9800;
+      --light-bg: #F5F5F5;
+      --white: #FFFFFF;
+      --dark-text: #212121;
+      --light-text: #555555;
+      --border-radius: 10px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--dark-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 0;
+      flex: 1;
+    }
+
+    a {
+      color: var(--accent-orange);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-yellow);
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--primary-yellow);
+      padding: 1rem 0;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      color: var(--dark-text);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--primary-yellow);
+      color: var(--dark-text);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-orange);
+      color: var(--white);
+    }
+
+    .btn-danger {
+      background-color: #E53935;
+      color: var(--white);
+    }
+
+    .btn-danger:hover {
+      background-color: #C62828;
+    }
+
+    .btn-secondary {
+      background-color: #BDBDBD;
+      color: var(--white);
+    }
+
+    .btn-secondary:hover {
+      background-color: #9E9E9E;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding:1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: var(--primary-yellow);
+      color: var(--dark-text);
+    }
+
+    tr:hover {
+      background-color: var(--light-bg);
+    }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: var(--border-radius);
+      border: 1px solid #ccc;
+      background-color: var(--white);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent-orange);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2);
+    }
+
+    /* Alerts */
+    .alert {
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 1.5rem;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    footer {
+      background-color: var(--primary-yellow);
+      color: var(--white);
+      text-align: center;
+      padding: 1rem 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="{% url 'employee_list' %}" class="navbar-brand">Creative EMS</a>
+      <div class="nav-links">
+        <a href="{% url 'employee_list' %}" class="nav-link">Employees</a>
+        <a href="{% url 'employee_create' %}" class="nav-link">Add Employee</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; {% now "Y" %} Creative Employee Management</p>
+  </footer>
+</body>
+</html>
